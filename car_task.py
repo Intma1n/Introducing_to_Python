@@ -1,12 +1,18 @@
 import csv
 import os
-
+#большими буквами константа пишется
 csv_filename = 'coursera_week3_cars.csv'
 
 
 class CarBase:
     def __init__(self, car_type, brand, photo_file_name, carrying):
-        pass
+        self.car_type = car_type
+        self.brand = brand
+        self.photo_file_name = photo_file_name
+        self.carrying = carrying
+
+    def __repr__(self):
+        return f"Тип машины - {self.car_type}, Бренд машины - {self.brand}, Имя фото - {self.photo_file_name}, Грузоподъемность - {self.carrying}"
 
     def get_photo_file_ext(self, photo_file_name):
         photo_file_ext = os.path.splitext(photo_file_name)
@@ -15,31 +21,39 @@ class CarBase:
 
 class Car(CarBase):
     def __init__(self, car_type, brand, passengers_seats_count, photo_file_name, carrying):
-        if isinstance((car_type, brand), str):
-            if isinstance(passengers_seats_count, int):
-                if isinstance(carrying, float):
-                    super().__init__(car_type, brand, photo_file_name, carrying)
-                else:
-                    ValueError
-            else:
-                ValueError
+        if isinstance(car_type, str):
+            if isinstance(brand, str):
+                if isinstance(passengers_seats_count, int):
+                    if isinstance(carrying, (float, int)):
+                        super().__init__(car_type, brand, photo_file_name, carrying)
+                        self.passengers_seats_count = passengers_seats_count
         else:
             ValueError
+
+    def __repr__(self):
+        my_string =super().__repr__()
+        my_string += f"Пассажировместимость - {self.passengers_seats_count}"
+        return my_string
 
 class Truck(CarBase):
     def __init__(self, car_type, brand, photo_file_name, carrying, body_whl):
-        self.body_whl = body_whl
-        if isinstance((car_type, brand, body_whl), str):
-            if isinstance(carrying, float):
-                super().__init__(car_type, brand, photo_file_name, carrying)
-                self.body_height = body_height
-                self.body_width = body_width
-                self.body_length = body_length
-
-            else:
-                ValueError
+        if isinstance(car_type, str):
+            if isinstance(brand, str):
+                if isinstance(body_whl, str):
+                    if isinstance(carrying, (float, int)):
+                        super().__init__(car_type, brand, photo_file_name, carrying)
+                        self.body_whl = body_whl
+                        self.body_height = body_height
+                        self.body_width = body_width
+                        self.body_length = body_length
         else:
             ValueError
+
+    def __repr__(self):
+        my_string = super().__repr__()
+        my_string += f"Параметры машины - {self.body_whl}"
+        return my_string
+
 
     def get_splitted_body_whl(self):
         body_whl_split = self.body_whl.split('x')
@@ -76,13 +90,20 @@ class Truck(CarBase):
 
 class SpecMachine(CarBase):
     def __init__(self, car_type, brand, photo_file_name, carrying, extra):
-        if isinstance((car_type, brand, extra), str):
-            if isinstance(carrying, float):
-                super().__init__(car_type, brand, photo_file_name, carrying)
-            else:
-                ValueError
+        if isinstance(car_type, str):
+            if isinstance(brand, str):
+                if isinstance(extra, str):
+                    if isinstance(carrying, (float, int)):
+                        self.extra = extra
+                        super().__init__(car_type, brand, photo_file_name, carrying)
+
         else:
             ValueError
+
+    def __repr__(self):
+        my_string = super().__repr__(self)
+        my_string += f"Дополнительная характеристика  - {self.extra}"
+        return my_string
 
 def get_car_list(csv_filename):
     car_list = []
