@@ -1,6 +1,3 @@
-import unittest
-
-
 def get_input():
     user_n = int(input('Номер крайнего элемента ряда Фибоначчи: '))
     return user_n
@@ -29,17 +26,6 @@ def fibonacci_recursion_method(n):
     return fib_elem
 
 
-class TestForFibonacciMethods(unittest.TestCase):
-    def some_tests(self):
-        cases = ([1], [2], [3], [5], [10], [20], ['Заходит тестировщик в бар'], [1, 2])
-        for b in cases:
-            a = b
-            fibonacci_cycle_method(a)
-            fibonacci_recursion_method(a)
-            self.assertEqual(a, b)
-            self.assertIsInstance(a, int)
-
-
 def main():
     my_n = get_input()
     my_fibonacci_cycle_method = fibonacci_cycle_method(my_n)
@@ -50,4 +36,4 @@ def main():
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
