@@ -1,4 +1,5 @@
 from re import findall
+from abc import ABC, abstractmethod
 
 
 def get_kind_of_solving():
@@ -21,7 +22,7 @@ def get_user_equation():
     return user_task
 
 
-class SolvingQuadraticEquation:
+class SolvingQuadraticEquation(ABC):
     def __init__(self, user_equation):
         self.user_equation = user_equation
 
@@ -29,13 +30,17 @@ class SolvingQuadraticEquation:
         #user_task = get_user_equation()
         return findall('\d+', self.user_equation)
 
+    @abstractmethod
+    def solving_by(self):
+        pass
+
 
 class SolvingByDiscriminant(SolvingQuadraticEquation):
     def __init__(self, user_equation):
         super().__init__(user_equation)
 
     def solving_by(self):
-        user_coeff = SolvingQuadraticEquation.get_coeff(self)
+        user_coeff = self.get_coeff()
         a = int(user_coeff[0])
         b = int(user_coeff[1])
         c = int(user_coeff[2])
@@ -53,7 +58,7 @@ class SolvingByViett(SolvingQuadraticEquation):
         super().__init__(user_equation)
 
     def solving_by(self):
-        user_coeff = SolvingQuadraticEquation.get_coeff(self)
+        user_coeff = self.get_coeff()
         a = int(user_coeff[0])
         b = int(user_coeff[1])
         c = int(user_coeff[2])
