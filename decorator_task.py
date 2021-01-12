@@ -29,9 +29,6 @@ class Hero:
 
 
 class AbstractEffect(Hero):
-    def __init__(self, effect):
-        self.effect = effect
-
     def get_positive_effects(self):
         pass
 
@@ -40,11 +37,19 @@ class AbstractEffect(Hero):
 
 
 class AbstractNegative(AbstractEffect):
-    pass
+    def __init__(self,effect):
+        self.effect = effect
+
+    def get_negative_effects(self):
+        pass
 
 
 class AbstractPositive(AbstractEffect):
-    pass
+    def __init__(self, effect):
+        self.effect = effect
+
+    def get_positive_effects(self):
+        pass
 
 
 class Berserk(AbstractPositive):
