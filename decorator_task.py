@@ -37,7 +37,7 @@ class AbstractEffect(Hero):
 
 
 class AbstractNegative(AbstractEffect):
-    def __init__(self,effect):
+    def __init__(self, effect):
         self.effect = effect
 
     def get_negative_effects(self):
@@ -71,3 +71,10 @@ class EvilEye(AbstractNegative):
 class Curse(AbstractNegative):
     pass
 
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
