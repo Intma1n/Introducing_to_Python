@@ -34,13 +34,13 @@ class AbstractEffect(Hero):
         self.base = base
 
     def get_positive_effects(self):
-        self.base.get_positive_effects()
+        self.base.positive_effects.copy()
 
     def get_stats(self):
-        self.base.get_stats()
+        self.base.stats.copy()
 
     def get_negative_effects(self):
-        self.base.get_negative_effects()
+        self.base.negative_effects.copy()
 
 
 class AbstractPositive(AbstractEffect):
