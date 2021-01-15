@@ -8,11 +8,18 @@ class System:
         self.map[5][2] = -1  # Стены
 
     def get_lightening(self, light_mapper):
-        self.lightmap = light_mapper.lighten(self.map)
+        lightmap = light_mapper.lighten(self.map)
+        return lightmap
 
 
 class Light:
     def __init__(self, dim):
+        self.dim = dim
+        self.grid = [[0 for i in range(dim[0])] for _ in range(dim[1])]
+        self.lights = []
+        self.obstacles = []
+
+    def set_dim(self, dim):
         self.dim = dim
         self.grid = [[0 for i in range(dim[0])] for _ in range(dim[1])]
 
@@ -30,28 +37,37 @@ class Light:
 
 class LightProcessor:
     @abstractmethod
-    def lighten(self, map):
+    def lighten(self, my_map):
         pass
 
 
-class LightCounterAdapter(LightProcessor):
+class MappingAdapter(LightProcessor):
     def __init__(self, adaptee):
         self.adaptee = adaptee
 
-    def lighten(self, map):
-        pass
+    def lighten(self, my_map):
+        dim = tuple(input('Enter dim:'))
+        obstacles = []
+        lights = []
+        my_grid = [[0 for i in range(int(dim[0]))] for _ in range(int(dim[1]))]
+        for i in range(len(my_map)):
+            for j in range(len(my_map[i])):
+                if my_map[i][j] == 1:
+                    lights.append([i, j])
+                if my_map[i][j] == -1:
+                    obstacles.append([i, j])
+                if my_map[i][j] == 0:
+                    my_map[i][j] = 's'
+        print(my_map.copy(), lights.copy(), obstacles.copy(), my_grid.copy())
+
 
 
 def main():
-    my_dim = [5, 5]
-    my_obstacles = []
-    my_lights = []
-
-    light = Light(my_dim)
-
-    light.set_lights(my_dim[1])
-    light.set_obstacles(my_dim[1])
-    print(light.generate_lights())
+    dim = [5, 5]
+    system = System()
+    light = Light(dim)
+    light_adapter = MappingAdapter(light)
+    print(system.get_lightening(light_adapter))
 
 
 if __name__ == '__main__':
