@@ -41,5 +41,6 @@ def main():
 
     manager.notify('Пизду')
 
+
 if __name__ == '__main__':
     main()
