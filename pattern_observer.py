@@ -33,13 +33,13 @@ class MessageNotifier(AbstractObserver):
 def main():
     notifier_1 = MessageNotifier('Константин Розизнаный')
     notifier_2 = MessageNotifier('Алексей Колесник')
+    notifier_3 = MessageNotifier('Dodik')
 
     manager = NotifyManager()
     manager.subscribe(notifier_1)
     manager.subscribe(notifier_2)
 
     manager.notify('Пизду')
-
 
 if __name__ == '__main__':
     main()
